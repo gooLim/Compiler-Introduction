@@ -12,13 +12,13 @@ public class BazToC {
         fileWriter.write("if (v == TRUE)\n");
         fileWriter.write("\tswitch(v) {\n");
         fileWriter.write("\t\tcase TRUE:\n");
-        fileWriter.write("\t\t\tprintf(\"TRUE\n\");\n");
+        fileWriter.write("\t\t\tprintf(\"TRUE\\n\");\n");
         fileWriter.write("\t\t\tbreak;\n");
         fileWriter.write("\t\tcase FALSE:\n");
-        fileWriter.write("\t\t\tprintf(\"FALSE\n\");\n");
+        fileWriter.write("\t\t\tprintf(\"FALSE\\n\");\n");
         fileWriter.write("\t\t\tbreak;\n");
         fileWriter.write("\t\tcase BAZ:\n");
-        fileWriter.write("\t\t\tprintf(\"BAZ\n\");\n");
+        fileWriter.write("\t\t\tprintf(\"BAZ\\n\");\n");
         fileWriter.write("\t\t\tbreak;\n");
         fileWriter.write("\t}\n\n");
         fileWriter.write("else  printf(\"YOU ARE WRONG!\\n\");\n");
