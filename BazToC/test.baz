@@ -1,6 +1,4 @@
-x = true
-if x
+if baz
 show true
 endif
-show x
-end
+show false
