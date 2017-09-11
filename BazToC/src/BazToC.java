@@ -11,7 +11,7 @@ public class BazToC {
         File inFile = new File("BazToC/test.baz");
         File outFile = new File("BazToC/test.c");
 
-        FileWriter fileWriter = new FileWriter(outFile, true);
+        BufferedWriter fileWriter = new BufferedWriter(new FileWriter(outFile, true));
         fileWriter.write("#include <stdio.h>\n");
         fileWriter.write("#include <stdlib.h>\n");
         fileWriter.write("#include <string.h>\n");
@@ -71,16 +71,30 @@ public class BazToC {
                 }
             }
             else if(str[0].equals("if")){
-                indent_num++;
-                fileWriter.write("\tif ("+str[1]+" == BAZ) \n");
-                fileWriter.write("\t\t temp = rand()%2;\n");
-                fileWriter.write("\tif ("+str[1]+" == TRUE || temp) {\n");
+                if(stack.contains(str[1]) || isBazVariable(str[1])){
+                    indent_num++;
+                    fileWriter.write("\tif (" + str[1] + " == BAZ) \n");
+                    fileWriter.write("\t\t temp = rand()%2;\n");
+                    fileWriter.write("\tif (" + str[1] + " == TRUE || temp) {\n");
+                }
+                else{
+                    fileWriter.write("\t{\n");
+                    fileWriter.write("\tprintf(\"YOU ARE WRONG!\\n\");\n");
+                    fileWriter.write("\tabort();\n");
+                }
             }
             else if(str[0].equals("if!")){
-                indent_num++;
-                fileWriter.write("\tif ("+str[1]+" == BAZ) \n");
-                fileWriter.write("\t\t temp = rand()%2;\n");
-                fileWriter.write("\tif ("+str[1]+" == FALSE || !temp) {\n");
+                if(stack.contains(str[1]) || isBazVariable(str[1])) {
+                    indent_num++;
+                    fileWriter.write("\tif (" + str[1] + " == BAZ) \n");
+                    fileWriter.write("\t\t temp = rand()%2;\n");
+                    fileWriter.write("\tif (" + str[1] + " == FALSE || !temp) {\n");
+                }
+                else{
+                    fileWriter.write("\t{\n");
+                    fileWriter.write("\tprintf(\"YOU ARE WRONG!\\n\");\n");
+                    fileWriter.write("\tabort();\n");
+                }
             }
             else if(str[0].equals("endif")){
                 indent_num--;

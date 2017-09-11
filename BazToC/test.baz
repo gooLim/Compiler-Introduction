@@ -1,4 +1,5 @@
-if baz
-show true
+get x
+if x
+show x
 endif
-show false
+show x
