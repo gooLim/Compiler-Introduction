@@ -1,6 +1,6 @@
 x = true
-x = baz
 if x
 show x
 endif
 show x
+end

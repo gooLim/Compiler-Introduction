@@ -38,7 +38,7 @@ public class BazToC {
 
         fileWriter.write("int main(){\n");
         fileWriter.write("\tsrand(time(NULL));\n");
-        fileWriter.write("\tint temp = 0;\n");
+        fileWriter.write("\tint random_number_val = 0;\n");
         BufferedReader bufferedReader = new BufferedReader(new FileReader(inFile));
         String line = null;
         while((line = bufferedReader.readLine()) != null){
@@ -48,7 +48,11 @@ public class BazToC {
             }
             if(str.length > 1)
                 str[1] = isBazVariable(str[1]) ? str[1].toUpperCase() : str[1];
-            if(str[0].equals("show")){
+            if(str.length > 3){
+                fileWriter.write("\tprintf(\"YOU ARE WRONG!\\n\");\n");
+                fileWriter.write("\tabort();\n");
+            }
+            else if(str[0].equals("show")){
                 if(stack.contains(str[1]) || isBazVariable(str[1].toLowerCase())) {
                     fileWriter.write("\tbaz_print(" + str[1] + ");\n");
                 }
@@ -72,9 +76,9 @@ public class BazToC {
                 if(stack.contains(str[1]) || isBazVariable(str[1].toLowerCase())){
                     indent_num++;
                     fileWriter.write("\tif (" + str[1] + " == BAZ) \n");
-                    fileWriter.write("\t\t temp = rand()%2;\n");
-                    fileWriter.write("\tif (" + str[1] + " == TRUE || temp) {\n");
-                    fileWriter.write("\ttemp = 0;\n");
+                    fileWriter.write("\t\t random_number_val = rand()%2;\n");
+                    fileWriter.write("\tif (" + str[1] + " == TRUE || random_number_val) {\n");
+                    fileWriter.write("\trandom_number_val = 0;\n");
                 }
                 else{
                     fileWriter.write("\t{\n");
@@ -86,9 +90,9 @@ public class BazToC {
                 if(stack.contains(str[1]) || isBazVariable(str[1].toLowerCase())) {
                     indent_num++;
                     fileWriter.write("\tif (" + str[1] + " == BAZ) \n");
-                    fileWriter.write("\t\t temp = rand()%2;\n");
-                    fileWriter.write("\tif (" + str[1] + " == FALSE || !temp) {\n");
-                    fileWriter.write("\ttemp = 0;\n");
+                    fileWriter.write("\t\t random_number_val = ;\n");
+                    fileWriter.write("\tif (" + str[1] + " == FALSE || random_number_val) {\n");
+                    fileWriter.write("\trandom_number_val = 0;\n");
                 }
                 else{
                     fileWriter.write("\t{\n");

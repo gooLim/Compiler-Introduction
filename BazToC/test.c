@@ -30,14 +30,14 @@ void baz_input(enum baz_val* v) {
 
 int main(){
 	srand(time(NULL));
-	int temp = 0;
+	int random_number_val = 0;
 	enum baz_val x = TRUE;
-	x = BAZ;
 	if (x == BAZ) 
-		 temp = rand()%2;
-	if (x == TRUE || temp) {
-	temp = 0;
+		 random_number_val = rand()%2;
+	if (x == TRUE || random_number_val) {
+	random_number_val = 0;
 		baz_print(x);
 	}
 	baz_print(x);
+return 1;
 }
