@@ -1,4 +1,5 @@
-get x
+x = true
+x = baz
 if x
 show x
 endif

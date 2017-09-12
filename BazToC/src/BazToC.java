@@ -47,9 +47,9 @@ public class BazToC {
                 fileWriter.write("\t");
             }
             if(str.length > 1)
-                str[1] = (str[1].equals("true") || str[1].equals("false")) || str[1].equals("baz") ? str[1].toUpperCase() : str[1];
+                str[1] = isBazVariable(str[1]) ? str[1].toUpperCase() : str[1];
             if(str[0].equals("show")){
-                if(stack.contains(str[1])) {
+                if(stack.contains(str[1]) || isBazVariable(str[1].toLowerCase())) {
                     fileWriter.write("\tbaz_print(" + str[1] + ");\n");
                 }
                 else{
@@ -69,11 +69,12 @@ public class BazToC {
                 }
             }
             else if(str[0].equals("if")){
-                if(stack.contains(str[1]) || isBazVariable(str[1])){
+                if(stack.contains(str[1]) || isBazVariable(str[1].toLowerCase())){
                     indent_num++;
                     fileWriter.write("\tif (" + str[1] + " == BAZ) \n");
                     fileWriter.write("\t\t temp = rand()%2;\n");
                     fileWriter.write("\tif (" + str[1] + " == TRUE || temp) {\n");
+                    fileWriter.write("\ttemp = 0;\n");
                 }
                 else{
                     fileWriter.write("\t{\n");
@@ -82,11 +83,12 @@ public class BazToC {
                 }
             }
             else if(str[0].equals("if!")){
-                if(stack.contains(str[1]) || isBazVariable(str[1])) {
+                if(stack.contains(str[1]) || isBazVariable(str[1].toLowerCase())) {
                     indent_num++;
                     fileWriter.write("\tif (" + str[1] + " == BAZ) \n");
                     fileWriter.write("\t\t temp = rand()%2;\n");
                     fileWriter.write("\tif (" + str[1] + " == FALSE || !temp) {\n");
+                    fileWriter.write("\ttemp = 0;\n");
                 }
                 else{
                     fileWriter.write("\t{\n");
@@ -110,6 +112,10 @@ public class BazToC {
                     temp_variable_count = indent_num >=1 ? ++temp_variable_count : temp_variable_count;
                     stack.push(str[0]);
                     fileWriter.write("\tenum baz_val " + str[0] + " = " + str[2].toUpperCase() + ";\n");
+                }
+                else if(stack.contains(str[0]) && isBazVariable(str[2])){
+                    temp_variable_count = indent_num >=1 ? ++temp_variable_count : temp_variable_count;
+                    fileWriter.write("\t"+ str[0] + " = " + str[2].toUpperCase() + ";\n");
                 }
                 else{
                     fileWriter.write("\tprintf(\"YOU ARE WRONG!\\n\");\n");

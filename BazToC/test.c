@@ -31,11 +31,12 @@ void baz_input(enum baz_val* v) {
 int main(){
 	srand(time(NULL));
 	int temp = 0;
-	enum baz_val x;
-	baz_input(&x);
+	enum baz_val x = TRUE;
+	x = BAZ;
 	if (x == BAZ) 
 		 temp = rand()%2;
 	if (x == TRUE || temp) {
+	temp = 0;
 		baz_print(x);
 	}
 	baz_print(x);
