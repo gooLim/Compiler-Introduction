@@ -1,3 +1,5 @@
-int a;
-int b[10];
-void test(){}
+int main(){
+	int k;
+	int i[10];
+	return k;
+}
